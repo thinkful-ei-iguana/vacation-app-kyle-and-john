@@ -34,12 +34,13 @@ function displayResults(responseJson) {
 }
 
 
-function getNationalParks(query, maxResults) {
+function getNationalParks(query, maxResults=10) {
   const params = {
     api_key: apiKey,
-    stateCode:query,
-    part: 'snippet',
-    maxResults,
+    //q: query,
+    stateCode: query,
+    //part: 'snippet',
+    limit: maxResults,
   };
   const queryString = formatQueryParams(params);
   const url = searchURL + '?' + queryString;
@@ -65,9 +66,15 @@ function watchForm() {
     event.preventDefault();
     let searchTerm = $('#js-search-term').val();
     let maxResults = $('#js-max-results').val();
+   
+    //let maxResults = document.getElementsById('#js-max-results').value;
+    //let maxResults = $('#js-max-results').val();
+    //let maxResults = event.target.max-displayResults.value;
+    //let maxResults = $('#js-max-results').val();
     console.log($('#js-max-results').val());
     getNationalParks(searchTerm, maxResults);
   });
 }
 
 $(watchForm);
+
