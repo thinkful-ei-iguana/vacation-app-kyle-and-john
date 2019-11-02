@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 'use strict';
 
-// put your own value below!
+
 const apiKey = 'IDsukmllTdLs0TJYkoPdJrzPzPNJAQUz7yhTmQ3k'; 
 const searchURL = 'https://developer.nps.gov/api/v1/parks';
 
@@ -19,10 +19,7 @@ function displayResults(responseJson) {
   $('#results-list').empty();
   // iterate through the items array
   for (let i = 0; i < responseJson.data.length; i++){
-    // for each video object in the items 
-    //array, add a list item to the results 
-    //list with the video title, description,
-    //and thumbnail
+  
     $('#results-list').append(
       `<li><h3>${responseJson.data[i].fullName}</h3>
       <p>${responseJson.data[i].description}</p>
@@ -67,11 +64,6 @@ function watchForm() {
     event.preventDefault();
     let searchTerm = $('#js-search-term').val();
     let maxResults = $('#js-max-results').val();
-   
-    //let maxResults = document.getElementsById('#js-max-results').value;
-    //let maxResults = $('#js-max-results').val();
-    //let maxResults = event.target.max-displayResults.value;
-    //let maxResults = $('#js-max-results').val();
     console.log($('#js-max-results').val());
     getNationalParks(searchTerm, maxResults);
   });
