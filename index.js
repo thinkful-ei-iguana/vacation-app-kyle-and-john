@@ -12,13 +12,25 @@ function formatQueryParams(params) {
   return queryItems.join('&');
 }
 
-
+function generatHtml(responseJson){
+  const data = responseJson.data;
+  const html =data.map(function(record){
+    const name = record.fullName;
+    const descr = record.description;
+    const siteUrl = record.url;
+    return `<div class= list-items>
+                <p>Full name:${name}</p>
+                <p>Description:${descr}</p>
+                <p>url:${siteUrl}</p>`
+  });
+  $('#js-results').html(html);
+}
 function getNationalParks(query, maxResults=10) {
   const params = {
     api_key: apiKey,
     stateCode:query,
     part: 'snippet',
-    maxResults
+    limit: maxResults
   };
   const queryString = formatQueryParams(params)
   const url = searchURL + '?' + queryString;
@@ -30,7 +42,9 @@ function getNationalParks(query, maxResults=10) {
       }
       throw new Error(response.statusText);
     })
-    .then(responseJson => console.log(JSON.stringify(responseJson)))
+    .then(responseJson => { 
+      generatHtml(responseJson);
+    })
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
