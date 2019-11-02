@@ -58,6 +58,7 @@ function getNationalParks(query, maxResults=10) {
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
+    console.log(responseJson);
     
 }
 
